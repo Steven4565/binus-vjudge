@@ -3,56 +3,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-bool checkRow(int **mat, int row, int n)
-{
-	int arr[n];
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = 0;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		arr[mat[i][row]]++;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] > 1)
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-bool checkCol(int **mat, int col, int n)
-{
-	int arr[n];
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = 0;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		int index = mat[col][i];
-		printf("index: %d\n", index);
-		arr[mat[col][i]]++;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] > 1)
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
 int main()
 {
 	int n;
