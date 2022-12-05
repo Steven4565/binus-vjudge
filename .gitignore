@@ -1,4 +1,6 @@
 .vscode
+*.bin
+*.cph
 
 # Prerequisites
 *.d
