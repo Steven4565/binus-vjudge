@@ -2,8 +2,7 @@
 
 int main()
 {
-	int test;
-	scanf("%d", &test);
+	int test = 1;
 
 	for (int t = 0; t < test; t++)
 	{
