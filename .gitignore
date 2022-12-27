@@ -1,6 +1,8 @@
 .vscode
 *.bin
 *.cph
+test/
+*/test/
 
 # Prerequisites
 *.d
