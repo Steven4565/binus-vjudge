@@ -3,8 +3,8 @@
 
 typedef struct Entry
 {
-	int num;
-	char name[50];
+	char name[1001];
+	int deadline;
 } Entry;
 
 void merge(Entry arr[], int l, int m, int r)
@@ -25,8 +25,7 @@ void merge(Entry arr[], int l, int m, int r)
 	k = l;
 	while (i < length1 && j < length2)
 	{
-		// printf("%s %s %d\n", L[i].name, R[i].name, strcmp(L[i].name, R[i].name));
-		if (strcmp(L[i].name, R[j].name) < 0)
+		if (L[i].deadline < R[j].deadline || (L[i].deadline == R[j].deadline && strcmp(L[i].name, R[j].name) < 0))
 		{
 			arr[k] = L[i];
 			i++;
@@ -67,27 +66,26 @@ void mergeSort(Entry arr[], int l, int r)
 	}
 }
 
+Entry entries[101];
+
 int main(int argc, char const *argv[])
 {
-	FILE *file = fopen("testdata.in", "r");
+	// FILE *handle = fopen("testdata.in", "r");
 
 	int n;
-	fscanf(file, "%d%*c", &n);
+	scanf(" %d", &n);
 
-	Entry entries[n];
 	for (int i = 0; i < n; i++)
 	{
-		fscanf(file, "%d#%[^\n]%*c", &entries[i].num, &entries[i].name);
+		scanf(" %s %d", &entries[i].name, &entries[i].deadline);
 	}
 
 	mergeSort(entries, 0, n - 1);
 
 	for (int i = 0; i < n; i++)
 	{
-		printf("%d %s\n", entries[i].num, entries[i].name);
+		printf("%s\n", entries[i].name);
 	}
-
-	fclose(file);
 
 	return 0;
 }

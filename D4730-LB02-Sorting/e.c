@@ -3,9 +3,22 @@
 
 typedef struct Entry
 {
-	int num;
-	char name[50];
+	char name[1001];
+	float temp;
+	char symbol;
 } Entry;
+
+float getCelcius(float temp, char symbol)
+{
+	if (symbol == 'C')
+	{
+		return temp;
+	}
+	else
+	{
+		return (temp - 32) * 5 / 9;
+	}
+}
 
 void merge(Entry arr[], int l, int m, int r)
 {
@@ -25,8 +38,9 @@ void merge(Entry arr[], int l, int m, int r)
 	k = l;
 	while (i < length1 && j < length2)
 	{
-		// printf("%s %s %d\n", L[i].name, R[i].name, strcmp(L[i].name, R[i].name));
-		if (strcmp(L[i].name, R[j].name) < 0)
+		float leftTemp = getCelcius(L[i].temp, L[i].symbol);
+		float rightTemp = getCelcius(R[j].temp, R[j].symbol);
+		if (leftTemp < rightTemp || (rightTemp == leftTemp && strcmp(L[i].name, R[j].name) < 0))
 		{
 			arr[k] = L[i];
 			i++;
@@ -67,27 +81,25 @@ void mergeSort(Entry arr[], int l, int r)
 	}
 }
 
+Entry entries[101];
+
 int main(int argc, char const *argv[])
 {
-	FILE *file = fopen("testdata.in", "r");
+	FILE *handle = fopen("testdata.in", "r");
 
-	int n;
-	fscanf(file, "%d%*c", &n);
-
-	Entry entries[n];
-	for (int i = 0; i < n; i++)
+	int n = 0;
+	while (!feof(handle))
 	{
-		fscanf(file, "%d#%[^\n]%*c", &entries[i].num, &entries[i].name);
+		fscanf(handle, "%[^#]#%f#%c\n", &entries[n].name, &entries[n].temp, &entries[n].symbol);
+		n++;
 	}
 
 	mergeSort(entries, 0, n - 1);
 
 	for (int i = 0; i < n; i++)
 	{
-		printf("%d %s\n", entries[i].num, entries[i].name);
+		printf("%s is %.2f%c\n", entries[i].name, entries[i].temp, entries[i].symbol);
 	}
-
-	fclose(file);
 
 	return 0;
 }

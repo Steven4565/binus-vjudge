@@ -3,7 +3,7 @@
 
 typedef struct Entry
 {
-	int num;
+	char num[15];
 	char name[50];
 } Entry;
 
@@ -25,8 +25,7 @@ void merge(Entry arr[], int l, int m, int r)
 	k = l;
 	while (i < length1 && j < length2)
 	{
-		// printf("%s %s %d\n", L[i].name, R[i].name, strcmp(L[i].name, R[i].name));
-		if (strcmp(L[i].name, R[j].name) < 0)
+		if (strcmp(L[i].num, R[j].num) < 0)
 		{
 			arr[k] = L[i];
 			i++;
@@ -77,14 +76,14 @@ int main(int argc, char const *argv[])
 	Entry entries[n];
 	for (int i = 0; i < n; i++)
 	{
-		fscanf(file, "%d#%[^\n]%*c", &entries[i].num, &entries[i].name);
+		fscanf(file, "%s %[^\n]%*c", &entries[i].num, &entries[i].name);
 	}
 
 	mergeSort(entries, 0, n - 1);
 
 	for (int i = 0; i < n; i++)
 	{
-		printf("%d %s\n", entries[i].num, entries[i].name);
+		printf("%s %s\n", entries[i].num, entries[i].name);
 	}
 
 	fclose(file);
