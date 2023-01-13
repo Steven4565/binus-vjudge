@@ -36,6 +36,11 @@ int main()
 			}
 		}
 
+		int consecutives = n - prev0 - 1;
+		// printf("%d\n", consecutives);
+		if (consecutives >= min && consecutives <= max)
+			valid++;
+
 		printf("Case #%d: %d\n", t + 1, valid);
 	}
 
