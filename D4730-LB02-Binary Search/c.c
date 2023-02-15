@@ -11,12 +11,14 @@ int search(long long *arr, int l, int r, long long x)
 		int m = l + (r - l) / 2;
 
 		if (arr[m] > x)
-			return search(arr, l, m - 1, x);
-
-		if (m == n - 1 || arr[m + 1] > x)
-			return m;
-
-		return search(arr, m + 1, r, x);
+			return search(arr, l, m - 1, x); // look to the left
+		else if (arr[m] <= x)							 // might be valid?
+		{
+			if (m == n - 1 || arr[m + 1] > x) // check if it's the **only** valid int
+				return m;
+			else															 // there's still valid values to the right
+				return search(arr, m + 1, r, x); // look to the right
+		}
 	}
 	return -1;
 }

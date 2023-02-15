@@ -8,10 +8,10 @@ int search(int *arr, int l, int r, int x)
 	{
 		int m = l + (r - l) / 2;
 
-		if (arr[m] == x && (m == 0 || arr[m - 1] != x))
+		if (arr[m] == x && (m == 0 || arr[m - 1] != x)) // check if left is not the same
 			return m;
 
-		if (arr[m] >= x)
+		if (arr[m] >= x) // left might be the same, then go to left
 			return search(arr, l, m - 1, x);
 		return search(arr, m + 1, r, x);
 	}
